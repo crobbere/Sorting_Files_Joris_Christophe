@@ -1,0 +1,55 @@
+package be.intecbrussel.opdrachten;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+public class FileIOOpdracht {
+    public static void main(String[] args) {
+
+        Path originalDirectory = Paths.get("C:/Users/Joris/Data/unsorted/unsorted");
+
+        //String parentDirectory = "C:/Users/Joris/Data/unsorted/unsorted";
+
+
+        // Hier kunt ge alle .extensies invullen om te filteren
+
+        String extension = ".txt";
+
+        FileFilter fileFilter = new FileFilter(extension);
+
+        String[] listOfCertainFiles = originalDirectory.toFile().list(fileFilter);
+
+        File fijl = null;
+
+        assert listOfCertainFiles != null;
+        if (listOfCertainFiles.length == 0){
+            System.out.println("there are no " +extension+ " files in the unsorted map");
+            return;
+        } else {
+            fijl = new File("C:/Users/Joris/Data/unsorted/unsorted/"+extension);
+        }
+
+
+        for (String file : listOfCertainFiles){
+            String parentDirectory = fijl + File.separator + file;
+            System.out.println(parentDirectory);
+        }
+    }
+
+}
+
+class FileFilter implements FilenameFilter {
+
+    private final String fileExtension;
+
+    public FileFilter(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+
+    @Override
+    public boolean accept(File dir, String fileName) {
+        return (fileName.endsWith(this.fileExtension));
+    }
+}
