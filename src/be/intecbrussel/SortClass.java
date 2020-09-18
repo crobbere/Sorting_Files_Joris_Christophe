@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 public class SortClass {
     Path originalDirectory = Paths.get("C:/Users/Joris/Data/unsorted/unsorted");
+    Path destinationDirectory = Paths.get("home/test/test");
+
 
     Stream<Path> pathStream;
 
@@ -21,12 +23,15 @@ public class SortClass {
                     .map(Path::toString)
                     .filter(e -> e.endsWith(Objects.requireNonNull(findExtension(e))))
                     .collect(Collectors.toList());
-
-
+            for(String f : result){
+                Files.createDirectory(destinationDirectory);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
     public static String findExtension(String fileName) {
         int lastIndex = fileName.lastIndexOf('.');
         if (lastIndex == -1) {
