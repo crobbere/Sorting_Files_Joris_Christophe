@@ -61,7 +61,7 @@ public class FileIOOpdracht4 {
                 try {
                     Path newDirectory = Path.of(originalDirectory + "/" + file.getName().substring(file.getName().lastIndexOf(".") + 1));
                     Files.createDirectories(newDirectory);
-                    Files.move(Path.of(file.getAbsolutePath()), Path.of(newDirectory + File.separator + file.getName()));
+                    Files.copy(Path.of(file.getAbsolutePath()), Path.of(newDirectory + File.separator + file.getName()));
 
                 } catch (IOException e) {
                     e.printStackTrace();
